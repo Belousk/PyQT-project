@@ -27,7 +27,7 @@ class MyWidget(QMainWindow, MainUI):
         self.rendering_table()
         self.titles = None
         self.do_paint = False
-        self.tabWidget.setStyleSheet('background-image: url("space.jpg");')
+        self.tabWidget.setStyleSheet('background-image: url("img/space.jpg");')
         self.tableWidget.setStyleSheet('background: none;')
         self.tableWidget_3.setStyleSheet('background: none;')
         self.pushButton.setStyleSheet('background: none;')

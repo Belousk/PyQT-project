@@ -12,9 +12,9 @@ class ChangeGenre(QDialog, GenreFormUI):
         self.parent = parent
         self.setupUi(self)
         self.setModal(True)
-        self.con = sqlite3.connect(main.DB_NAME)
+        self.con = sqlite3.connect(main.DB_NAME)  # connecting to data base
         self.pushButton.setText('Изменить')
-        self.pushButton.clicked.connect(self.change_data)
+        self.pushButton.clicked.connect(self.change_data)  # button clicked
         cur = self.con.cursor()
         self.id = self.parent.tableWidget_3.item(self.parent.tableWidget_3.currentRow(), 0).text()
 

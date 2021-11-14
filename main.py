@@ -27,9 +27,7 @@ class MyWidget(QMainWindow, MainUI):
         self.rendering_table()
         self.titles = None
         self.do_paint = False
-        self.tabWidget.setStyleSheet('background-image: url("space.jpg");'
-                                     'background-size: cover;'
-                                     'background-repeat: no-repeat;')
+        self.tabWidget.setStyleSheet('background-image: url("space.jpg");')
         self.tableWidget.setStyleSheet('background: none;')
         self.tableWidget_3.setStyleSheet('background: none;')
         self.pushButton.setStyleSheet('background: none;')
@@ -38,16 +36,6 @@ class MyWidget(QMainWindow, MainUI):
         self.pushButton_7.setStyleSheet('background: none;')
         self.pushButton_8.setStyleSheet('background: none;')
         self.pushButton_9.setStyleSheet('background: none;')
-
-
-        # height = self.height()
-        # width = self.width()
-        # pixmap = QPixmap()
-        # pixmap.load('space.jpg')
-        # pixmap = pixmap.scaled(height, width, Qt.KeepAspectRatioByExpanding)
-        # print(height, width)
-        # painter = QPainter(self)
-        # painter.drawPixmap(0, 0, pixmap)
 
     def open_create_widget(self):
         ex1 = addFilmForm.AddFilm(self)
@@ -62,7 +50,7 @@ class MyWidget(QMainWindow, MainUI):
 
     def open_delete_widget(self):
         if self.tableWidget.item(self.tableWidget.currentRow(), 0) is not None:
-            ex1 = deletFilmForm.DeleteFilm(self)
+            deletFilmForm.DeleteFilm(self)
             self.rendering_table()
 
     def open_create_genre(self):
@@ -78,7 +66,7 @@ class MyWidget(QMainWindow, MainUI):
 
     def open_delete_genre(self):
         if self.tableWidget_3.item(self.tableWidget_3.currentRow(), 0) is not None:
-            ex1 = deletGenreForm.DeleteGenre(self)
+            ex1 = deletGenreForm.DeleteGenre(self, self.tableWidget_3.item(self.tableWidget_3.currentRow(), 0))
             self.rendering_table()
 
     def rendering_table(self):

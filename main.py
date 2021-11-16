@@ -3,7 +3,7 @@ import sys
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPixmap
-from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog
+from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QWidget
 from PyQt5 import QtCore, QtGui, QtWidgets
 from design.mainUI import MainUI
@@ -24,10 +24,18 @@ class MyWidget(QMainWindow, MainUI):
         self.pushButton_7.clicked.connect(self.open_create_genre)
         self.pushButton_8.clicked.connect(self.open_change_genre)
         self.pushButton_9.clicked.connect(self.open_delete_genre)
+        self.pushButton_10.clicked.connect(self.set_theme)
+        self.pushButton_11.clicked.connect(self.set_theme)
         self.rendering_table()
         self.titles = None
         self.do_paint = False
-        self.tabWidget.setStyleSheet('background-image: url("img/space.jpg");')
+
+    def set_theme(self):
+        file_name = QFileDialog.getOpenFileName(
+            self, 'Выбрать картинку', '',
+            'Все файлы (*)')[0]
+
+        self.tabWidget.setStyleSheet(f'background-image: url("{file_name}");')
         self.tableWidget.setStyleSheet('background: none;')
         self.tableWidget_3.setStyleSheet('background: none;')
         self.pushButton.setStyleSheet('background: none;')
@@ -36,6 +44,8 @@ class MyWidget(QMainWindow, MainUI):
         self.pushButton_7.setStyleSheet('background: none;')
         self.pushButton_8.setStyleSheet('background: none;')
         self.pushButton_9.setStyleSheet('background: none;')
+        self.pushButton_10.setStyleSheet('background: none;')
+        self.pushButton_11.setStyleSheet('background: none;')
 
     def open_create_widget(self):
         ex1 = addFilmForm.AddFilm(self)
@@ -85,6 +95,7 @@ ORDER BY title
         genres = cur.execute("""SELECT * FROM genres""").fetchall()
         self.tableWidget_3.setRowCount(len(genres))
         self.tableWidget_3.setColumnCount(len(genres[0]))
+        self.tableWidget_3.setHorizontalHeaderLabels(['Id', 'название'])
         for i, row in enumerate(genres):
             for j, val in enumerate(row):
                 item = QTableWidgetItem(str(val))
@@ -93,6 +104,7 @@ ORDER BY title
 
         self.tableWidget.setRowCount(len(table))
         self.tableWidget.setColumnCount(len(table[0]))
+        self.tableWidget.setHorizontalHeaderLabels(['Id', 'название', 'год', 'жанр', 'длительность'])
         for i, row in enumerate(table):
             for j, val in enumerate(row):
                 item = QTableWidgetItem(str(val))

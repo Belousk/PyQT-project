@@ -30,6 +30,15 @@ class MyWidget(QMainWindow, MainUI):
         self.titles = None
         self.do_paint = False
 
+    def keyPressEvent(self, event):
+        if int(event.modifiers()) == Qt.AltModifier:
+            if event.key() == Qt.Key_H:
+                self.tableWidget.hide()
+                self.tableWidget_3.hide()
+            if event.key() == Qt.Key_V:
+                self.tableWidget.show()
+                self.tableWidget_3.show()
+
     def set_theme(self):
         file_name = QFileDialog.getOpenFileName(
             self, 'Выбрать картинку', '',
